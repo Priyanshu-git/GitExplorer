@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         val apiHelper = RetrofitHelper(RetrofitBuilder.apiService)
         lifecycleScope.launch {
-            apiHelper.getGithubUserRepos("priyanshu-git").collect{
+            apiHelper.getGithubUserRepository("priyanshu-git").collect{
                 Log.d(TAG, "onCreate: $it")
             }
         }

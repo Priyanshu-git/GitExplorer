@@ -12,7 +12,7 @@ interface ApiService {
     suspend fun getGithubUser(@Path("username") username: String): GithubUserModel
 
     @GET("users/{username}/repos")
-    suspend fun getGithubUserRepos(@Path("username") username: String): GithubReposModel
+    suspend fun getGithubUserRepository(@Path("username") username: String): GithubReposModel
 
     @GET("repos/{username}/{repo}")
     suspend fun getGithubUserRepository(@Path("username") username: String, @Path("repo") repo: String): GithubReposItem

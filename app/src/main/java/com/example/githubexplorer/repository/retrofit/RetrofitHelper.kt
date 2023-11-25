@@ -16,7 +16,7 @@ class RetrofitHelper(private val apiService: ApiService) : ApiInterface {
 
     override fun getGithubUserRepository(username: String): Flow<GithubReposModel> {
         return flow {
-            emit(apiService.getGithubUserRepos(username))
+            emit(apiService.getGithubUserRepository(username))
         }
     }
 

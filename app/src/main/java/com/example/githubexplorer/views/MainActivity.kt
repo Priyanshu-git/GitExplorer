@@ -1,33 +1,44 @@
 package com.example.githubexplorer.views
 
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.githubexplorer.R
-import com.example.githubexplorer.repository.retrofit.RetrofitHelper
-import com.example.githubexplorer.repository.retrofit.RetrofitBuilder
+import com.example.githubexplorer.databinding.ActivityMainBinding
+import com.example.githubexplorer.viewmodels.GitViewModel
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
+    private lateinit var binding: ActivityMainBinding
+    val gitViewModel: GitViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        val apiHelper = RetrofitHelper(RetrofitBuilder.apiService)
         lifecycleScope.launch {
-            apiHelper.getGithubUserRepository("priyanshu-git").collect{
-                Log.d(TAG, "onCreate: $it")
+            gitViewModel.gitUserFlow.collect{
+                Toast.makeText(this@MainActivity, "Profile Found!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.next.setOnClickListener {
+            val username= binding.username.text.toString()
+            lifecycleScope.launch{
+                gitViewModel.getGitUserData(username)
             }
         }
     }

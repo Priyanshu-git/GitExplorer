@@ -9,17 +9,17 @@ import retrofit2.http.Path
 
 interface ApiService {
     @GET("users/{username}")
-    suspend fun getGithubUser(@Path("username") username: String): GithubUserModel
+    suspend fun getGithubUser(@Path("username") username: String): GithubUserModel?
 
     @GET("users/{username}/repos")
-    suspend fun getGithubUserRepository(@Path("username") username: String): GithubReposModel
+    suspend fun getGithubUserRepository(@Path("username") username: String): GithubReposModel?
 
     @GET("repos/{username}/{repo}")
-    suspend fun getGithubUserRepository(@Path("username") username: String, @Path("repo") repo: String): GithubReposItem
+    suspend fun getGithubUserRepository(@Path("username") username: String, @Path("repo") repo: String): GithubReposItem?
 
     @GET("users/{username}/followers")
-    suspend fun getGithubUserFollowers(@Path("username") username: String): FollowersModel
+    suspend fun getGithubUserFollowers(@Path("username") username: String): FollowersModel?
 
     @GET("users/{username}/following")
-    suspend fun getGithubUserFollowing(@Path("username") username: String): FollowersModel
+    suspend fun getGithubUserFollowing(@Path("username") username: String): FollowersModel?
 }

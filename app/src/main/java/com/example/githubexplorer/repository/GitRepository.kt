@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 class GitRepository {
     private val apiHelper = RetrofitHelper(RetrofitBuilder.apiService)
 
-    private val _gitUserFlow = MutableSharedFlow<GithubUserModel>()
+    private val _gitUserFlow = MutableSharedFlow<GithubUserModel?>()
     val gitUserFlow = _gitUserFlow.asSharedFlow()
     suspend fun getGithubUser(username: String) {
         _gitUserFlow.emit(apiHelper.getGithubUser(username))

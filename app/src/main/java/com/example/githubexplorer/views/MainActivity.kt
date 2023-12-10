@@ -29,16 +29,23 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        lifecycleScope.launch {
-            gitViewModel.gitUserFlow.collect{
-                Toast.makeText(this@MainActivity, "Profile Found!", Toast.LENGTH_SHORT).show()
-            }
-        }
+        initializeMainUI()
+    }
 
+    private fun initializeMainUI() {
         binding.next.setOnClickListener {
             val username= binding.username.text.toString()
             lifecycleScope.launch{
                 gitViewModel.getGitUserData(username)
+            }
+        }
+
+        lifecycleScope.launch {
+            gitViewModel.gitUserFlow.collect{
+                if (it != null)
+                    Toast.makeText(this@MainActivity, "Profile Found!", Toast.LENGTH_SHORT).show()
+                else
+                    Toast.makeText(this@MainActivity, "Profile Not Found!", Toast.LENGTH_SHORT).show()
             }
         }
     }

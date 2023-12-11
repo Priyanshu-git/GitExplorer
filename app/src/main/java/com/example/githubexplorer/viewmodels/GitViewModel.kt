@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 
 class GitViewModel : ViewModel() {
     val repository = GitRepository()
+
     val gitUserFlow = repository.gitUserFlow
     suspend fun getGitUserData(username: String) {
         viewModelScope.launch {

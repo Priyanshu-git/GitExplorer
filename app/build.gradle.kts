@@ -47,6 +47,10 @@ dependencies {
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.fragment.ktx)
+
+    // FRESCO
+    implementation(libs.fresco)
 
 
     // RETROFIT

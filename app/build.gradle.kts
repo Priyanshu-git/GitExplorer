@@ -52,6 +52,9 @@ dependencies {
     // FRESCO
     implementation(libs.fresco)
 
+    // NAVIGATION COMPONENT
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     // RETROFIT
     implementation(libs.retrofit)

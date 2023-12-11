@@ -20,7 +20,7 @@ class MainActivity : FragmentActivity() {
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.container_frame)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -30,8 +30,5 @@ class MainActivity : FragmentActivity() {
     }
 
     private fun initializeMainUI() {
-        supportFragmentManager.beginTransaction()
-            .replace(binding.containerFrame.id, HomeFragment())
-            .commit()
     }
 }

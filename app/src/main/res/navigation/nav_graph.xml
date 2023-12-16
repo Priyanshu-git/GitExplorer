@@ -12,12 +12,11 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment"
-            app:popUpTo="@layout/fragment_home"/>
+            app:destination="@id/profileFragment"/>
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.githubexplorer.views.ProfileFragment"
+        android:name="com.example.githubexplorer.views.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" >
         <argument

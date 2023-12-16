@@ -15,4 +15,18 @@ class GitViewModel : ViewModel() {
         }
     }
 
+    val gitAllReposFlow = repository.gitAllReposFlow
+    suspend fun getGitAllReposData(username: String) {
+        viewModelScope.launch {
+            repository.getAllReposOfUser(username)
+        }
+    }
+
+    val gitRepoFlow = repository.gitAllReposFlow
+    suspend fun getGitRepoData(username: String, repositoryName: String) {
+        viewModelScope.launch {
+            repository.getRepoOfUser(username, repositoryName)
+        }
+    }
+
 }

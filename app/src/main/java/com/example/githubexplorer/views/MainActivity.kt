@@ -1,11 +1,13 @@
 package com.example.githubexplorer.views
 
 import android.os.Bundle
+import android.window.OnBackInvokedDispatcher
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.findNavController
 import com.example.githubexplorer.R
 import com.example.githubexplorer.databinding.ActivityMainBinding
 import com.example.githubexplorer.viewmodels.GitViewModel
@@ -25,5 +27,10 @@ class MainActivity : FragmentActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    override fun getOnBackInvokedDispatcher(): OnBackInvokedDispatcher {
+        findNavController(binding.navHostFragment.id).popBackStack()
+        return super.getOnBackInvokedDispatcher()
     }
 }

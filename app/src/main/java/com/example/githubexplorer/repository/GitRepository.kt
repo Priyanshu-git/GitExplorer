@@ -1,5 +1,7 @@
 package com.example.githubexplorer.repository
 
+import com.example.githubexplorer.models.repos.GithubReposItem
+import com.example.githubexplorer.models.repos.GithubReposModel
 import com.example.githubexplorer.models.user.GithubUserModel
 import com.example.githubexplorer.repository.retrofit.RetrofitBuilder
 import com.example.githubexplorer.repository.retrofit.RetrofitHelper
@@ -13,6 +15,18 @@ class GitRepository {
     val gitUserFlow = _gitUserFlow.asSharedFlow()
     suspend fun getGithubUser(username: String) {
         _gitUserFlow.emit(apiHelper.getGithubUser(username))
+    }
+
+    private val _gitAllRepoFlow = MutableSharedFlow<GithubReposModel?>()
+    val gitAllReposFlow = _gitAllRepoFlow.asSharedFlow()
+    suspend fun getAllReposOfUser(username: String) {
+        _gitAllRepoFlow.emit(apiHelper.getGithubUserRepository(username))
+    }
+
+    private val _gitRepoFlow = MutableSharedFlow<GithubReposItem?>()
+    val gitRepoFlow = _gitRepoFlow.asSharedFlow()
+    suspend fun getRepoOfUser(username: String, repositoryName:String) {
+        _gitRepoFlow.emit(apiHelper.getGithubUserRepository(username, repositoryName))
     }
 
 }

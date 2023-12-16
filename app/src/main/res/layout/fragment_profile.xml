@@ -30,12 +30,25 @@
             android:id="@+id/tv_git_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/ubuntu_light"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            tools:text="Username" />
+
+        <TextView
+            android:id="@+id/tv_user_bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/ubuntu_light"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_git_user_name"
             tools:text="Username" />
 
 
@@ -46,7 +59,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_git_user_name">
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_bio">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout3"
@@ -116,9 +129,11 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/repos_container"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/social_container">
@@ -136,8 +151,8 @@
                 android:id="@+id/tv_repo_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="()"
                 android:layout_marginLeft="4dp"
+                android:text="()"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/textView4"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -147,10 +162,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4"
+                app:layout_constraintVertical_bias="0.0"
                 tools:itemCount="4"
                 tools:listitem="@layout/repo_item" />
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,14 @@
 package com.example.githubexplorer.views
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.githubexplorer.databinding.FragmentHomeBinding
 import com.example.githubexplorer.viewmodels.GitViewModel
 import kotlinx.coroutines.launch
@@ -41,8 +41,10 @@ class HomeFragment : Fragment() {
 
         lifecycleScope.launch {
             gitViewModel.gitUserFlow.collect{
-                if (it != null)
+                if (it != null) {
                     Toast.makeText(requireContext(), "Profile Found!", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment(it))
+                }
                 else
                     Toast.makeText(requireContext(), "Profile Not Found!", Toast.LENGTH_SHORT).show()
             }

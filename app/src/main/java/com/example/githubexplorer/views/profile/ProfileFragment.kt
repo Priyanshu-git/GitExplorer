@@ -65,7 +65,7 @@ class ProfileFragment : Fragment() {
         })
 
         lifecycleScope.launch {
-            viewmodel.getGitAllReposData(model.login)
+            viewmodel.getGitAllReposData(model.login!!)
             viewmodel.gitAllReposFlow.collect{
                 adapter.updateData(it)
                 binding.tvRepoCount.text = "(${adapter.itemCount})"

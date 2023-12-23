@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.githubexplorer.R
 import com.example.githubexplorer.databinding.FragmentHomeBinding
+import com.example.githubexplorer.utils.AppConstants
 import com.example.githubexplorer.viewmodels.GitViewModel
 import kotlinx.coroutines.launch
 
@@ -43,7 +45,9 @@ class HomeFragment : Fragment() {
             gitViewModel.gitUserFlow.collect{
                 if (it != null) {
                     Toast.makeText(requireContext(), "Profile Found!", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment(it))
+                    val bundle = Bundle()
+                    bundle.putParcelable(AppConstants.USER_MODEL_KEY, it)
+                    findNavController().navigate(R.id.profileFragment, bundle)
                 }
                 else
                     Toast.makeText(requireContext(), "Profile Not Found!", Toast.LENGTH_SHORT).show()

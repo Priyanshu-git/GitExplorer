@@ -4,12 +4,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.githubexplorer.repository.GitRepository
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class GitViewModel : ViewModel() {
     val repository = GitRepository()
+    var currentUser = ""
 
-    val gitUserFlow = repository.gitUserFlow.distinctUntilChanged()
+    val gitUserFlow = repository.gitUserFlow
+        .distinctUntilChanged()
+        .onEach {
+            currentUser = it?.login ?: ""
+        }
     suspend fun getGitUserData(username: String) {
         viewModelScope.launch {
             repository.getGithubUser(username)

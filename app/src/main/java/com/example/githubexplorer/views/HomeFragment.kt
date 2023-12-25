@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.githubexplorer.R
 import com.example.githubexplorer.databinding.FragmentHomeBinding
+import com.example.githubexplorer.models.user.GithubUserModel
 import com.example.githubexplorer.utils.AppConstants
 import com.example.githubexplorer.viewmodels.GitViewModel
 import kotlinx.coroutines.launch
@@ -19,6 +20,7 @@ import kotlinx.coroutines.launch
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val gitViewModel: GitViewModel by activityViewModels()
+    private var currentModel: GithubUserModel? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -35,23 +37,31 @@ class HomeFragment : Fragment() {
 
     private fun initializeMainUI() {
         binding.next.setOnClickListener {
-            val username= binding.username.text.toString()
-            lifecycleScope.launch{
-                gitViewModel.getGitUserData(username)
+            val username = binding.username.text.toString()
+            lifecycleScope.launch {
+                if (username == gitViewModel.currentUser && currentModel!=null) {
+                    openProfile(currentModel)
+                } else
+                    gitViewModel.getGitUserData(username)
             }
         }
 
         lifecycleScope.launch {
-            gitViewModel.gitUserFlow.collect{
+            gitViewModel.gitUserFlow.collect {
                 if (it != null) {
                     Toast.makeText(requireContext(), "Profile Found!", Toast.LENGTH_SHORT).show()
-                    val bundle = Bundle()
-                    bundle.putParcelable(AppConstants.USER_MODEL_KEY, it)
-                    findNavController().navigate(R.id.profileFragment, bundle)
-                }
-                else
-                    Toast.makeText(requireContext(), "Profile Not Found!", Toast.LENGTH_SHORT).show()
+                    openProfile(it)
+                } else
+                    Toast.makeText(requireContext(), "Profile Not Found!", Toast.LENGTH_SHORT)
+                        .show()
             }
         }
+    }
+
+    private fun openProfile(it: GithubUserModel?) {
+        val bundle = Bundle()
+        bundle.putParcelable(AppConstants.USER_MODEL_KEY, it)
+        currentModel = it
+        findNavController().navigate(R.id.profileFragment, bundle)
     }
 }

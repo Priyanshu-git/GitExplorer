@@ -1,19 +1,15 @@
 package com.example.githubexplorer.views.profile
 
-import android.annotation.SuppressLint
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
-import com.example.githubexplorer.R
 import com.example.githubexplorer.databinding.FragmentProfileBinding
 import com.example.githubexplorer.models.repos.GithubReposModel
 import com.example.githubexplorer.models.user.GithubUserModel
@@ -33,18 +29,10 @@ class ProfileFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val model:GithubUserModel = arguments?.getParcelable(AppConstants.USER_MODEL_KEY)!!
+        val model: GithubUserModel = arguments?.getParcelable(AppConstants.USER_MODEL_KEY)!!
 
         setUpProfileData(model)
         setUpReposList(model)
-        setBackPressedListener()
-
-    }
-
-    private fun setBackPressedListener() {
-        requireActivity().onBackPressedDispatcher.addCallback{
-            findNavController().popBackStack(R.id.homeFragment, inclusive = false, saveState = false)
-        }
     }
 
     private fun setUpReposList(model: GithubUserModel) {

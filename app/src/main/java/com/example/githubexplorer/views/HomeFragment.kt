@@ -36,11 +36,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun initializeMainUI() {
-        binding.next.setOnClickListener {
+        binding.btnNext.setOnClickListener {
+            binding.loader.visibility = View.VISIBLE
+            binding.loader.show()
+            binding.imgNext.visibility = View.GONE
             val username = binding.username.text.toString()
             lifecycleScope.launch {
                 if (username == gitViewModel.currentUser && currentModel!=null) {
                     openProfile(currentModel)
+                    binding.loader.visibility = View.GONE
+                    binding.loader.hide()
+                    binding.imgNext.visibility = View.VISIBLE
                 } else
                     gitViewModel.getGitUserData(username)
             }

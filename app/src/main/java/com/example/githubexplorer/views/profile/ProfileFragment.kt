@@ -64,7 +64,7 @@ class ProfileFragment : Fragment() {
                     }
 
                     ApiStatus.ERROR -> AppUtility.showToast(requireContext(), "Unable to fetch repository data")
-                    ApiStatus.LOADING -> TODO()
+                    ApiStatus.LOADING -> {}
                 }
             }
         }
@@ -76,5 +76,12 @@ class ProfileFragment : Fragment() {
         binding.tvFollowingCount.text = model.following.toString()
         binding.imageView.setImageURI(model.avatar_url)
         binding.tvUserBio.text = model.bio
+        if (model.html_url.isNullOrBlank())
+            binding.profileExternalLink.visibility = View.GONE
+        else {
+            binding.profileExternalLink.setOnClickListener {
+                AppUtility.openUrl(requireContext(), model.html_url)
+            }
+        }
     }
 }

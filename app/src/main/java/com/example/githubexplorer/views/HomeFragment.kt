@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.githubexplorer.R
 import com.example.githubexplorer.databinding.FragmentHomeBinding
 import com.example.githubexplorer.models.user.GithubUserModel
+import com.example.githubexplorer.networking.ApiStatus
 import com.example.githubexplorer.utils.AppConstants
 import com.example.githubexplorer.viewmodels.GitViewModel
 import kotlinx.coroutines.launch
@@ -37,16 +38,12 @@ class HomeFragment : Fragment() {
 
     private fun initializeMainUI() {
         binding.btnNext.setOnClickListener {
-            binding.loader.visibility = View.VISIBLE
-            binding.loader.show()
-            binding.imgNext.visibility = View.GONE
+            showLoader()
             val username = binding.username.text.toString()
             lifecycleScope.launch {
                 if (username == gitViewModel.currentUser && currentModel!=null) {
                     openProfile(currentModel)
-                    binding.loader.visibility = View.GONE
-                    binding.loader.hide()
-                    binding.imgNext.visibility = View.VISIBLE
+                    hideLoader()
                 } else
                     gitViewModel.getGitUserData(username)
             }
@@ -54,12 +51,20 @@ class HomeFragment : Fragment() {
 
         lifecycleScope.launch {
             gitViewModel.gitUserFlow.collect {
-                if (it != null) {
-                    Toast.makeText(requireContext(), "Profile Found!", Toast.LENGTH_SHORT).show()
-                    openProfile(it)
-                } else
-                    Toast.makeText(requireContext(), "Profile Not Found!", Toast.LENGTH_SHORT)
-                        .show()
+                when(it.status){
+                    ApiStatus.SUCCESS -> {
+                        Toast.makeText(requireContext(), "Profile Found!", Toast.LENGTH_SHORT).show()
+                        openProfile(it.data)
+                        hideLoader()
+                    }
+
+                    ApiStatus.ERROR -> {
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT)
+                            .show()
+                        hideLoader()
+                    }
+                    ApiStatus.LOADING -> showLoader()
+                }
             }
         }
     }
@@ -69,5 +74,16 @@ class HomeFragment : Fragment() {
         bundle.putParcelable(AppConstants.USER_MODEL_KEY, it)
         currentModel = it
         findNavController().navigate(R.id.profileFragment, bundle)
+    }
+
+    private fun showLoader(){
+        binding.loader.visibility = View.VISIBLE
+        binding.loader.show()
+        binding.imgNext.visibility = View.GONE
+    }
+    private fun hideLoader(){
+        binding.loader.visibility = View.GONE
+        binding.loader.hide()
+        binding.imgNext.visibility = View.VISIBLE
     }
 }

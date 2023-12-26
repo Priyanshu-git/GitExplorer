@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.example.githubexplorer.databinding.FragmentProfileBinding
 import com.example.githubexplorer.models.repos.GithubReposModel
 import com.example.githubexplorer.models.user.GithubUserModel
+import com.example.githubexplorer.networking.ApiStatus
 import com.example.githubexplorer.utils.AppConstants
+import com.example.githubexplorer.utils.AppUtility
 import com.example.githubexplorer.viewmodels.GitViewModel
 import kotlinx.coroutines.launch
 
@@ -55,8 +57,15 @@ class ProfileFragment : Fragment() {
         lifecycleScope.launch {
             viewmodel.getGitAllReposData(model.login!!)
             viewmodel.gitAllReposFlow.collect{
-                adapter.updateData(it)
-                binding.tvRepoCount.text = "(${adapter.itemCount})"
+                when(it.status){
+                    ApiStatus.SUCCESS ->{
+                        adapter.updateData(it.data)
+                        binding.tvRepoCount.text = "(${adapter.itemCount})"
+                    }
+
+                    ApiStatus.ERROR -> AppUtility.showToast(requireContext(), "Unable to fetch repository data")
+                    ApiStatus.LOADING -> TODO()
+                }
             }
         }
     }

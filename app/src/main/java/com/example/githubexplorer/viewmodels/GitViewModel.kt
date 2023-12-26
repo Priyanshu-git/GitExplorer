@@ -2,6 +2,7 @@ package com.example.githubexplorer.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.githubexplorer.networking.ApiStatus
 import com.example.githubexplorer.repository.GitRepository
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.onEach
@@ -12,9 +13,9 @@ class GitViewModel : ViewModel() {
     var currentUser = ""
 
     val gitUserFlow = repository.gitUserFlow
-        .distinctUntilChanged()
         .onEach {
-            currentUser = it?.login ?: ""
+            if (it.status == ApiStatus.SUCCESS)
+                currentUser = it.data?.login!!
         }
     suspend fun getGitUserData(username: String) {
         viewModelScope.launch {

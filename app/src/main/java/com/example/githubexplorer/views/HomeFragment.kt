@@ -22,6 +22,9 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val gitViewModel: GitViewModel by activityViewModels()
     private var currentModel: GithubUserModel? = null
+
+    val navController
+        get() = findNavController()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -70,10 +73,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun openProfile(it: GithubUserModel?) {
-        val bundle = Bundle()
-        bundle.putParcelable(AppConstants.USER_MODEL_KEY, it)
-        currentModel = it
-        findNavController().navigate(R.id.profileFragment, bundle)
+        if (navController.currentDestination?.label != "ProfileFragment") {
+            val bundle = Bundle()
+            bundle.putParcelable(AppConstants.USER_MODEL_KEY, it)
+            currentModel = it
+            navController.navigate(R.id.profileFragment, bundle)
+        }
     }
 
     private fun showLoader(){

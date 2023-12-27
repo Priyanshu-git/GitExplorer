@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="link">#F4F4F4</color>
+    <color name="icons_color">#F4F4F4</color>
 
     <color name="tags_chip_bg">@color/material_dynamic_primary20</color>
     <color name="tags_chip_text">@color/material_dynamic_primary70</color>

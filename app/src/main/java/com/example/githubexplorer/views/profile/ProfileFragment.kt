@@ -60,7 +60,7 @@ class ProfileFragment : Fragment() {
                 when(it.status){
                     ApiStatus.SUCCESS ->{
                         adapter.updateData(it.data)
-                        binding.tvRepoCount.text = "(${adapter.itemCount})"
+//                        binding.tvRepoCount.text = "(${adapter.itemCount})"
                     }
 
                     ApiStatus.ERROR -> AppUtility.showToast(requireContext(), "Unable to fetch repository data")
@@ -76,6 +76,7 @@ class ProfileFragment : Fragment() {
         binding.tvFollowingCount.text = model.following.toString()
         binding.imageView.setImageURI(model.avatar_url)
         binding.tvUserBio.text = model.bio
+        binding.tvRepoCount.text = "(${model.public_repos})"
         if (model.html_url.isNullOrBlank())
             binding.profileExternalLink.visibility = View.GONE
         else {

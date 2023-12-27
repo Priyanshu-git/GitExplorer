@@ -187,7 +187,7 @@
             app:layout_constraintStart_toEndOf="@+id/tv_git_user_name"
             app:layout_constraintTop_toTopOf="@+id/tv_git_user_name"
             android:src="@drawable/ic_external_link"
-            android:tint="@color/link"
+            android:tint="@color/icons_color"
             tools:ignore="UseAppTint" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -2,9 +2,33 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
 
-    <color name="link">#070707</color>
+    <color name="icons_color">#070707</color>
     <color name="tags_chip_bg">@color/material_dynamic_primary95</color>
     <color name="tags_chip_text">@color/material_dynamic_primary40</color>
 
+    <!-- Programming Language Colors -->
+    <color name="colorJavaScript">#f1e05a</color>
+    <color name="colorJava">#b07219</color>
+    <color name="colorPython">#3572A5</color>
+    <color name="colorRuby">#701516</color>
+    <color name="colorTypeScript">#1C718A</color>
+    <color name="colorCSharp">#178600</color>
+    <color name="colorCpp">#f34b7d</color>
+    <color name="colorC">#CDDC39</color>
+    <color name="colorCSS">#563d7c</color>
+    <color name="colorGo">#375eab</color>
+    <color name="colorSwift">#ffac45</color>
+    <color name="colorObjectiveC">#438eff</color>
+    <color name="colorPHP">#4F5D95</color>
+    <color name="colorShell">#89e051</color>
+    <color name="colorPowerShell">#012456</color>
+    <color name="colorRust">#dea584</color>
+    <color name="colorKotlin">#A97BFF</color>
+    <color name="colorScala">#c22d40</color>
+    <color name="colorHTML">#e34c26</color>
+    <color name="colorVue">#2C5034</color>
+    <color name="colorPerl">#0073A1</color>
+    <color name="colorR">#198CE7</color>
 </resources>

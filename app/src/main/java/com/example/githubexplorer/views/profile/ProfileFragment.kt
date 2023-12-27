@@ -75,7 +75,11 @@ class ProfileFragment : Fragment() {
         binding.tvFollowersCount.text = model.followers.toString()
         binding.tvFollowingCount.text = model.following.toString()
         binding.imageView.setImageURI(model.avatar_url)
-        binding.tvUserBio.text = model.bio
+
+        if (model.bio.isNullOrBlank())
+            binding.tvUserBio.visibility = View.GONE
+        else
+            binding.tvUserBio.text = model.bio
         binding.tvRepoCount.text = "(${model.public_repos})"
         if (model.html_url.isNullOrBlank())
             binding.profileExternalLink.visibility = View.GONE

@@ -27,6 +27,7 @@
                 android:fontFamily="@font/ubuntu_regular"
                 android:gravity="center"
                 android:hint="Enter a Git username"
+                android:inputType="text|textAutoComplete"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

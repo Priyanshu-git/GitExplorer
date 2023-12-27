@@ -64,6 +64,9 @@ dependencies {
     // GSON
     implementation(libs.gson)
 
+    // FLEXBOX
+    implementation(libs.google.flexbox)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

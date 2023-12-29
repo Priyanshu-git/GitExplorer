@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
+import com.example.githubexplorer.CustomToast
 import com.example.githubexplorer.R
 import com.example.githubexplorer.databinding.ActivityMainBinding
 import com.example.githubexplorer.viewmodels.GitViewModel
@@ -20,6 +21,7 @@ class MainActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        CustomToast.initialize(this)
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -31,4 +31,9 @@
     <color name="colorVue">#2C5034</color>
     <color name="colorPerl">#0073A1</color>
     <color name="colorR">#198CE7</color>
+
+<!--    Toast colours -->
+    <color name="toast_tag">@color/material_dynamic_primary30</color>
+    <color name="toast_background">@color/material_dynamic_primary95</color>
+    <color name="toast_text">@color/material_dynamic_primary10</color>
 </resources>

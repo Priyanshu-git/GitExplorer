@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.githubexplorer.CustomToast
 import com.example.githubexplorer.R
 import com.example.githubexplorer.databinding.FragmentHomeBinding
 import com.example.githubexplorer.models.user.GithubUserModel
 import com.example.githubexplorer.networking.ApiStatus
 import com.example.githubexplorer.utils.AppConstants
+import com.example.githubexplorer.utils.AppUtility
 import com.example.githubexplorer.viewmodels.GitViewModel
 import kotlinx.coroutines.launch
 
@@ -56,14 +58,13 @@ class HomeFragment : Fragment() {
             gitViewModel.gitUserFlow.collect {
                 when(it.status){
                     ApiStatus.SUCCESS -> {
-                        Toast.makeText(requireContext(), "Profile Found!", Toast.LENGTH_SHORT).show()
+                        AppUtility.showToast("Profile Found!", CustomToast.LENGTH_SHORT)
                         openProfile(it.data)
                         hideLoader()
                     }
 
                     ApiStatus.ERROR -> {
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT)
-                            .show()
+                        AppUtility.showToast(it.message!!)
                         hideLoader()
                     }
                     ApiStatus.LOADING -> showLoader()

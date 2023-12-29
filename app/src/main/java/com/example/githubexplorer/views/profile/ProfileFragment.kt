@@ -63,7 +63,7 @@ class ProfileFragment : Fragment() {
 //                        binding.tvRepoCount.text = "(${adapter.itemCount})"
                     }
 
-                    ApiStatus.ERROR -> AppUtility.showToast(requireContext(), "Unable to fetch repository data")
+                    ApiStatus.ERROR -> AppUtility.showToast("Unable to fetch repository data")
                     ApiStatus.LOADING -> {}
                 }
             }

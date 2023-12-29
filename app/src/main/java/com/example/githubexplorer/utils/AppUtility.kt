@@ -2,8 +2,10 @@ package com.example.githubexplorer.utils
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
-import android.widget.Toast
+import android.util.TypedValue
+import com.example.githubexplorer.CustomToast
 import com.example.githubexplorer.R
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -11,12 +13,8 @@ import java.util.TimeZone
 
 class AppUtility {
     companion object {
-        fun showToast(context: Context, message: String) {
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-        }
-
-        fun showToast(context: Context, message: String, duration: Int) {
-            Toast.makeText(context, message, duration).show()
+        fun showToast(message: String, duration: Int = CustomToast.LENGTH_SHORT) {
+            CustomToast.show(message, duration)
         }
 
         fun openUrl(context: Context, htmlUrl: String) {
@@ -65,5 +63,14 @@ class AppUtility {
             val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
             return outputFormat.format(date)
         }
+
+        fun Int.toDp(): Float {
+            return TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                this.toFloat(),
+                Resources.getSystem().displayMetrics
+            )
+        }
+
     }
 }

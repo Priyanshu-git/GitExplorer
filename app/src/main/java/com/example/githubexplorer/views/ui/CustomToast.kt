@@ -1,4 +1,4 @@
-package com.example.githubexplorer
+package com.example.githubexplorer.views.ui
 
 import android.content.Context
 import android.view.Gravity

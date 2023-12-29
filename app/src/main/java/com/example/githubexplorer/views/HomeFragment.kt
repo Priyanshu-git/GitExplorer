@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.githubexplorer.CustomToast
+import com.example.githubexplorer.views.ui.CustomToast
 import com.example.githubexplorer.R
 import com.example.githubexplorer.databinding.FragmentHomeBinding
 import com.example.githubexplorer.models.user.GithubUserModel

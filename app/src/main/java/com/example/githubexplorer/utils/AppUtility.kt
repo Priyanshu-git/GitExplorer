@@ -5,7 +5,7 @@ import android.content.Intent
 import android.content.res.Resources
 import android.net.Uri
 import android.util.TypedValue
-import com.example.githubexplorer.CustomToast
+import com.example.githubexplorer.views.ui.CustomToast
 import com.example.githubexplorer.R
 import java.text.SimpleDateFormat
 import java.util.Locale

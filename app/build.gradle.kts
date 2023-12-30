@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
     // FRESCO
     implementation(libs.fresco)

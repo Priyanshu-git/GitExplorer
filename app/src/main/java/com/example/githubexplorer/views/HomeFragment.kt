@@ -45,28 +45,27 @@ class HomeFragment : Fragment() {
             showLoader()
             val username = binding.username.text.toString()
             lifecycleScope.launch {
-                if (username == gitViewModel.currentUser && currentModel!=null) {
+                if (username == gitViewModel.currentUser && currentModel != null) {
                     openProfile(currentModel)
                     hideLoader()
-                } else
+                } else {
                     gitViewModel.getGitUserData(username)
-            }
-        }
+                        .collect {
+                            when (it.status) {
+                                ApiStatus.SUCCESS -> {
+                                    AppUtility.showToast("Profile Found!", CustomToast.LENGTH_SHORT)
+                                    openProfile(it.data)
+                                    hideLoader()
+                                }
 
-        lifecycleScope.launch {
-            gitViewModel.gitUserFlow.collect {
-                when(it.status){
-                    ApiStatus.SUCCESS -> {
-                        AppUtility.showToast("Profile Found!", CustomToast.LENGTH_SHORT)
-                        openProfile(it.data)
-                        hideLoader()
-                    }
+                                ApiStatus.ERROR -> {
+                                    AppUtility.showToast(it.message!!)
+                                    hideLoader()
+                                }
 
-                    ApiStatus.ERROR -> {
-                        AppUtility.showToast(it.message!!)
-                        hideLoader()
-                    }
-                    ApiStatus.LOADING -> showLoader()
+                                ApiStatus.LOADING -> showLoader()
+                            }
+                        }
                 }
             }
         }

@@ -1,9 +1,15 @@
 package com.example.githubexplorer.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.githubexplorer.models.repos.GithubReposModel
+import com.example.githubexplorer.models.user.GithubUserModel
+import com.example.githubexplorer.networking.ApiResult
 import com.example.githubexplorer.networking.ApiStatus
 import com.example.githubexplorer.repository.GitRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -11,23 +17,19 @@ import kotlinx.coroutines.launch
 class GitViewModel : ViewModel() {
     val repository = GitRepository()
     var currentUser = ""
-
-    val gitUserFlow = repository.gitUserFlow
-        .onEach {
-            if (it.status == ApiStatus.SUCCESS)
-                currentUser = it.data?.login!!
-        }
-    suspend fun getGitUserData(username: String) {
-        viewModelScope.launch {
-            repository.getGithubUser(username)
-        }
+    suspend fun getGitUserData(username: String): Flow<ApiResult<GithubUserModel?>> {
+        return repository.getGithubUser(username)
+            .onEach {
+                if (it.status == ApiStatus.SUCCESS)
+                    currentUser = it.data?.login!!
+            }
     }
 
     val gitAllReposFlow = repository.gitAllReposFlow
-    suspend fun getGitAllReposData(username: String) {
-        viewModelScope.launch {
-            repository.getAllReposOfUser(username)
-        }
+        .asLiveData(viewModelScope.coroutineContext)
+    suspend fun getGitAllReposData(username: String): LiveData<ApiResult<GithubReposModel?>> {
+        return repository.getAllReposOfUser(username)
+            .asLiveData(viewModelScope.coroutineContext)
     }
 
     val gitRepoFlow = repository.gitAllReposFlow

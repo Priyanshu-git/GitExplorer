@@ -56,11 +56,10 @@ class ProfileFragment : Fragment() {
 
         lifecycleScope.launch {
             viewmodel.getGitAllReposData(model.login!!)
-            viewmodel.gitAllReposFlow.collect{
+                .observe(viewLifecycleOwner){
                 when(it.status){
                     ApiStatus.SUCCESS ->{
                         adapter.updateData(it.data)
-//                        binding.tvRepoCount.text = "(${adapter.itemCount})"
                     }
 
                     ApiStatus.ERROR -> AppUtility.showToast("Unable to fetch repository data")

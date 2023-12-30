@@ -23,7 +23,7 @@ class ProfileFragment : Fragment() {
     lateinit var binding: FragmentProfileBinding
     val viewmodel: GitViewModel by activityViewModels()
     val spaceSize = 16
-
+    lateinit var model: GithubUserModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         binding = FragmentProfileBinding.inflate(layoutInflater)
@@ -31,7 +31,7 @@ class ProfileFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val model: GithubUserModel = arguments?.getParcelable(AppConstants.USER_MODEL_KEY)!!
+        model = arguments?.getParcelable(AppConstants.USER_MODEL_KEY)!!
 
         setUpProfileData(model)
         setUpReposList(model)
@@ -40,6 +40,7 @@ class ProfileFragment : Fragment() {
     private fun setUpReposList(model: GithubUserModel) {
         val adapter = RepositoryAdapter(GithubReposModel())
         binding.rvReposList.adapter = adapter
+        adapter.userName = model.login
         binding.rvReposList.addItemDecoration(object: ItemDecoration(){
             override fun getItemOffsets(outRect: Rect,view: View,parent: RecyclerView,state: RecyclerView.State) {
                 with(outRect) {
@@ -60,10 +61,16 @@ class ProfileFragment : Fragment() {
                 when(it.status){
                     ApiStatus.SUCCESS ->{
                         adapter.updateData(it.data)
+                        adapter.showLoader(false)
                     }
 
-                    ApiStatus.ERROR -> AppUtility.showToast("Unable to fetch repository data")
-                    ApiStatus.LOADING -> {}
+                    ApiStatus.ERROR -> {
+                        AppUtility.showToast("Unable to fetch repository data")
+                        adapter.showLoader(false)
+                    }
+                    ApiStatus.LOADING -> {
+                        adapter.showLoader(true)
+                    }
                 }
             }
         }

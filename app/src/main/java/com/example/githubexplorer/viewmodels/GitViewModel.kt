@@ -10,8 +10,8 @@ import com.example.githubexplorer.networking.ApiResult
 import com.example.githubexplorer.networking.ApiStatus
 import com.example.githubexplorer.repository.GitRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class GitViewModel : ViewModel() {
@@ -29,6 +29,9 @@ class GitViewModel : ViewModel() {
         .asLiveData(viewModelScope.coroutineContext)
     suspend fun getGitAllReposData(username: String): LiveData<ApiResult<GithubReposModel?>> {
         return repository.getAllReposOfUser(username)
+            .onStart {
+                emit(ApiResult.Loading(true))
+            }
             .asLiveData(viewModelScope.coroutineContext)
     }
 

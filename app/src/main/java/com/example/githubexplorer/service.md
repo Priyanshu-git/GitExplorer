@@ -18,3 +18,12 @@ Repo: https://api.github.com/repos/Priyanshu-git/11linefacerecognition
 "repos_url": "https://api.github.com/users/Priyanshu-git/repos",
 "events_url": "https://api.github.com/users/Priyanshu-git/events{/privacy}",
 "received_events_url": "https://api.github.com/users/Priyanshu-git/received_events",
+
+# App features
+- Kotlin Flow with livedata
+- Navigation Component
+- Custom Toast
+- Retrofit with logging interceptor
+- MVVM architecture
+- Network calls centralized handling with states
+- Multiple view types adapter for recycler view

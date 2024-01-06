@@ -17,6 +17,8 @@ class RetrofitHelper(private val apiService: ApiService) : ApiInterface {
             } else {
                 if (result.code() == 404)
                     return ApiResult.Error("Not Found")
+                if (result.code() == 403)
+                    return ApiResult.Error("API rate limit exceeded")
                 return ApiResult.Error(result.message())
             }
         } catch (e: Exception) {

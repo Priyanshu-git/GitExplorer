@@ -44,7 +44,6 @@ class SocialAdapter(val fragment: UsersListFragment, var data: FollowersModel) :
                     .collect{
                         when (it.status) {
                             ApiStatus.SUCCESS -> {
-                                AppUtility.showToast("Profile Found!", CustomToast.LENGTH_SHORT)
                                 openProfile(it.data)
                                 hideLoader(holder)
                             }
@@ -66,14 +65,14 @@ class SocialAdapter(val fragment: UsersListFragment, var data: FollowersModel) :
 
     private fun hideLoader(holder: SocialViewHolder) {
         holder.binding.container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.transparent))
-//        holder.binding.loader.visibility = ViewGroup.GONE
-//        holder.binding.loader.hide()
+        holder.binding.loader.visibility = ViewGroup.GONE
+        holder.binding.loader.hide()
     }
 
     private fun showLoader(holder: SocialViewHolder) {
         holder.binding.container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.dim))
-//        holder.binding.loader.visibility = ViewGroup.VISIBLE
-//        holder.binding.loader.show()
+        holder.binding.loader.visibility = ViewGroup.VISIBLE
+        holder.binding.loader.show()
     }
 
     private fun openProfile(data: GithubUserModel?) {

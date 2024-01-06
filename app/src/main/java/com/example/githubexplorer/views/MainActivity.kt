@@ -11,13 +11,15 @@ import androidx.navigation.Navigation
 import com.example.githubexplorer.views.ui.CustomToast
 import com.example.githubexplorer.R
 import com.example.githubexplorer.databinding.ActivityMainBinding
+import com.example.githubexplorer.utils.AppConstants
+import com.example.githubexplorer.utils.AppUtility
+import com.example.githubexplorer.utils.NavigationHelper
 import com.example.githubexplorer.viewmodels.GitViewModel
 import java.lang.Exception
 
 class MainActivity : FragmentActivity() {
     private val TAG = "MainActivity"
     private lateinit var binding: ActivityMainBinding
-    val gitViewModel: GitViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +35,13 @@ class MainActivity : FragmentActivity() {
         onBackPressedDispatcher.addCallback{
             val controller = Navigation.findNavController(binding.navHostFragment)
             try {
-                if (controller.currentDestination?.label!! == "HomeFragment")
+                if (NavigationHelper.getCurrentFragment() == AppConstants.HOME_FRAGMENT)
                     finishAffinity()
                 else
                     controller.popBackStack()
             } catch (e:Exception){
-                controller.popBackStack()
+                e.printStackTrace()
+                AppUtility.showToast(e.message.toString())
             }
         }
     }

@@ -9,12 +9,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.githubexplorer.views.ui.CustomToast
-import com.example.githubexplorer.R
 import com.example.githubexplorer.databinding.FragmentHomeBinding
 import com.example.githubexplorer.models.user.GithubUserModel
 import com.example.githubexplorer.networking.ApiStatus
-import com.example.githubexplorer.utils.AppConstants
 import com.example.githubexplorer.utils.AppUtility
+import com.example.githubexplorer.utils.NavigationHelper
 import com.example.githubexplorer.viewmodels.GitViewModel
 import kotlinx.coroutines.launch
 
@@ -24,10 +23,9 @@ class HomeFragment : Fragment() {
     private val gitViewModel: GitViewModel by activityViewModels()
     private var currentModel: GithubUserModel? = null
 
-    val navController
-        get() = findNavController()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        NavigationHelper.setUpNavController(findNavController())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View {
@@ -43,7 +41,7 @@ class HomeFragment : Fragment() {
     private fun initializeMainUI() {
         binding.btnNext.setOnClickListener {
             showLoader()
-            val username = binding.username.text.toString()
+            val username = binding.username.text.toString().trim()
             lifecycleScope.launch {
                 if (username == gitViewModel.currentUser && currentModel != null) {
                     openProfile(currentModel)
@@ -72,11 +70,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun openProfile(it: GithubUserModel?) {
-        if (navController.currentDestination?.label != "ProfileFragment") {
-            val bundle = Bundle()
-            bundle.putParcelable(AppConstants.USER_MODEL_KEY, it)
+        if (NavigationHelper.getCurrentFragment() != "ProfileFragment") {
             currentModel = it
-            navController.navigate(R.id.profileFragment, bundle)
+            NavigationHelper.openProfileFragment(it)
         }
     }
 

@@ -25,8 +25,6 @@ class GitViewModel : ViewModel() {
             }
     }
 
-    val gitAllReposFlow = repository.gitAllReposFlow
-        .asLiveData(viewModelScope.coroutineContext)
     suspend fun getGitAllReposData(username: String): LiveData<ApiResult<GithubReposModel?>> {
         return repository.getAllReposOfUser(username)
             .onStart {
@@ -35,7 +33,6 @@ class GitViewModel : ViewModel() {
             .asLiveData(viewModelScope.coroutineContext)
     }
 
-    val gitRepoFlow = repository.gitAllReposFlow
     suspend fun getGitRepoData(username: String, repositoryName: String) {
         viewModelScope.launch {
             repository.getRepoOfUser(username, repositoryName)

@@ -12,15 +12,20 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment"/>
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.githubexplorer.views.profile.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile" >
-        <argument
-            android:name="githubUserModel"
-            app:argType="com.example.githubexplorer.models.user.GithubUserModel" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_socialFragment"
+            app:destination="@id/socialFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/socialFragment"
+        android:name="com.example.githubexplorer.views.social.SocialFragment"
+        android:label="SocialFragment"
+        tools:layout="@layout/fragment_social" />
 </navigation>

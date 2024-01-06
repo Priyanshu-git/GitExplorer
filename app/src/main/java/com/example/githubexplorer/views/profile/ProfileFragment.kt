@@ -16,6 +16,7 @@ import com.example.githubexplorer.models.user.GithubUserModel
 import com.example.githubexplorer.networking.ApiStatus
 import com.example.githubexplorer.utils.AppConstants
 import com.example.githubexplorer.utils.AppUtility
+import com.example.githubexplorer.utils.NavigationHelper
 import com.example.githubexplorer.viewmodels.GitViewModel
 import kotlinx.coroutines.launch
 
@@ -35,6 +36,16 @@ class ProfileFragment : Fragment() {
 
         setUpProfileData(model)
         setUpReposList(model)
+        var name = model.name
+        if (name.isNullOrBlank())
+            name = model.login
+        binding.followersContainer.setOnClickListener{
+            NavigationHelper.openSocialFragment("Followers", name!!, model.login!!)
+        }
+        binding.followingContainer.setOnClickListener{
+            NavigationHelper.openSocialFragment("Following", name!!, model.login!!)
+        }
+
     }
 
     private fun setUpReposList(model: GithubUserModel) {

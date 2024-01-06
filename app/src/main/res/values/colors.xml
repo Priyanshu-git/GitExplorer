@@ -31,8 +31,25 @@
     <color name="colorVue">#2C5034</color>
     <color name="colorPerl">#0073A1</color>
     <color name="colorR">#198CE7</color>
+    <color name="colorDart">#8E44AD</color>
+    <color name="colorErlang">#2E86C1</color>
+    <color name="colorGroff">#27AE60</color>
+    <color name="colorElixir">#E74C3C</color>
+    <color name="colorLua">#F39C12</color>
+    <color name="colorViml">#3498DB</color>
+    <color name="colorCoffeeScript">#D35400</color>
+    <color name="colorHaskell">#5D6D7E</color>
+    <color name="colorOCaml">#E74C3C</color>
+    <color name="colorClojure">#5881D8</color>
+    <color name="colorDjango">#0C4B33</color>
+    <color name="colorFSharp">#3782C1</color>
+    <color name="colorAda">#02A4D3</color>
+    <color name="colorProlog">#74283C</color>
+    <color name="colorMatlab">#0076A8</color>
+    <color name="colorJulia">#9558B2</color>
 
-<!--    Toast colours -->
+
+    <!--    Toast colours -->
     <color name="toast_tag">@color/material_dynamic_primary30</color>
     <color name="toast_background">@color/material_dynamic_primary95</color>
     <color name="toast_text">@color/material_dynamic_primary10</color>

@@ -46,6 +46,22 @@ class AppUtility {
                 "vue" to R.color.colorVue,
                 "perl" to R.color.colorPerl,
                 "r" to R.color.colorR,
+                "dart" to R.color.colorDart,
+                "erlang" to R.color.colorErlang,
+                "groff" to R.color.colorGroff,
+                "elixir" to R.color.colorElixir,
+                "lua" to R.color.colorLua,
+                "viml" to R.color.colorViml,
+                "coffeescript" to R.color.colorCoffeeScript,
+                "haskell" to R.color.colorHaskell,
+                "ocaml" to R.color.colorOCaml,
+                "clojure" to R.color.colorClojure,
+                "django" to R.color.colorDjango,
+                "fsharp" to R.color.colorFSharp,
+                "ada" to R.color.colorAda,
+                "prolog" to R.color.colorProlog,
+                "matlab" to R.color.colorMatlab,
+                "julia" to R.color.colorJulia
             )
             return if (languageColorMap.containsKey(language.lowercase())) {
                 languageColorMap[language.lowercase()]!!

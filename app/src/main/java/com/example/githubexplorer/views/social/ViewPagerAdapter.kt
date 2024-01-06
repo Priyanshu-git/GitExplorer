@@ -5,7 +5,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class ViewPagerAdapter(fragment: Fragment, val login: String) : FragmentStateAdapter(fragment) {
     private val NUM_TABS = 2
-    var followers : UsersListFragment ?= null
+    var followers : UsersListFragment? = null
     var following : UsersListFragment? = null
 
     override fun getItemCount(): Int {

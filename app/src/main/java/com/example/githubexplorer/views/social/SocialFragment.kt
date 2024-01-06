@@ -36,6 +36,10 @@ class SocialFragment : Fragment() {
 
         setUpActionBar()
         setupViewPager()
+        if (source == requireContext().getString(R.string.following)) {
+            binding.tabLayout.getTabAt(1)?.select()
+            binding.viewpager.setCurrentItem(1, false)
+        }
     }
 
     private fun setupViewPager() {

@@ -19,9 +19,8 @@ class GitViewModel : ViewModel() {
     var currentUser = ""
     suspend fun getGitUserData(username: String): Flow<ApiResult<GithubUserModel?>> {
         return repository.getGithubUser(username)
-            .onEach {
-                if (it.status == ApiStatus.SUCCESS)
-                    currentUser = it.data?.login!!
+            .onStart {
+                emit(ApiResult.Loading(true))
             }
     }
 
